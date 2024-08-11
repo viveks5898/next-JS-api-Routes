@@ -1,4 +1,5 @@
-import React from "react";
+import Link from "next/link";
+import React, { use } from "react";
 
 async function Page() {
   const res = await fetch("http://localhost:3000/api/users", {
@@ -16,13 +17,16 @@ async function Page() {
           All users&nbsp;
         </p>
         <ul className="flex gap-2">
-          {data?.map((user) => (
+          {data?.map((user, key) => (
+            <Link href={`users/${user.id}`}
+            key={key}
+            >
             <li
-              key={user.id}
               className="border rounded-lg py-3 px-3 hover:shadow-2xl cursor-pointer"
             >
               {user?.name}
             </li>
+            </Link>
           ))}
         </ul>
       </div>
